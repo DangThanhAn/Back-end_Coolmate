@@ -11,4 +11,5 @@ public partial class Image
 
     public string? ImgUrl { get; set; }
 
+    public virtual Product Product { get; set; } = null!;
 }

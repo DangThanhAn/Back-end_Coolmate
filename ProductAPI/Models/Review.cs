@@ -5,21 +5,19 @@ namespace ProductAPI.Models;
 
 public partial class Review
 {
-    public int Id { get; set; }
+    public int ReviewId { get; set; }
 
-    public int? ProductTypeId { get; set; }
+    public int ProductId { get; set; }
 
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
 
-    public string? Describe { get; set; }
+    public int Rating { get; set; }
 
-    public string? Image { get; set; }
+    public string Comment { get; set; } = null!;
 
-    public int? Star { get; set; }
+    public DateTime CreatedDate { get; set; }
 
-    public DateTime? DateReview { get; set; }
+    public virtual Product Product { get; set; } = null!;
 
-    public virtual ProductType? ProductType { get; set; }
-
-    public virtual User? User { get; set; }
+    public virtual User User { get; set; } = null!;
 }

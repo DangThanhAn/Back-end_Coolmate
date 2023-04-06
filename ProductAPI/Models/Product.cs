@@ -23,15 +23,19 @@ public partial class Product
 
     public string? Sale { get; set; }
 
-    //public virtual Category? Category { get; set; }
+    //public virtual ICollection<CartDetail> CartDetails { get; } = new List<CartDetail>();
 
-    //public virtual Collection? Collection { get; set; }
+    public virtual Category? Category { get; set; }
+
+    public virtual Collection? Collection { get; set; }
 
     public virtual ICollection<Color> Colors { get; } = new List<Color>();
 
     public virtual ICollection<Image> Images { get; } = new List<Image>();
 
-    //public virtual ProductType? ProductType { get; set; }
+    public virtual ProductType? ProductType { get; set; }
+
+    public virtual ICollection<Review> Reviews { get; } = new List<Review>();
 
     public virtual ICollection<Size> Sizes { get; } = new List<Size>();
 }

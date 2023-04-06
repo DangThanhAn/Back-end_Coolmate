@@ -14,6 +14,4 @@ public partial class ProductType
     public string? Image { get; set; }
 
     public virtual ICollection<Product> Products { get; } = new List<Product>();
-
-    public virtual ICollection<Review> Reviews { get; } = new List<Review>();
 }

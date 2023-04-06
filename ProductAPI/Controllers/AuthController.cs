@@ -35,6 +35,7 @@ namespace ProductAPI.Controllers
                 {
                     var claims = new[]
                     {
+                         new Claim("Id", user.Id.ToString()),
                          new Claim("UserName", user.UserName),
                          new Claim("Role", user.Role),
                          new Claim("Email", user.Email),

@@ -8,7 +8,6 @@ public partial class User
     public int Id { get; set; }
 
     public string? UserName { get; set; }
-    public string? Password { get; set; }
 
     public DateTime? DateOfBirth { get; set; }
 
@@ -27,6 +26,12 @@ public partial class User
     public int? Height { get; set; }
 
     public int? Weight { get; set; }
+
+    public string? Password { get; set; }
+
+    public virtual ICollection<Cart> Carts { get; } = new List<Cart>();
+
+    public virtual ICollection<Order> Orders { get; } = new List<Order>();
 
     public virtual ICollection<Review> Reviews { get; } = new List<Review>();
 }

@@ -41,7 +41,11 @@ namespace ProductAPI.Controllers
           {
               return NotFound();
           }
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products
+                .Include(color => color.Colors)
+                .Include(size => size.Sizes)
+                .Include(img => img.Images)
+                .FirstOrDefaultAsync( p=> p.Id == id);
 
             if (product == null)
             {
