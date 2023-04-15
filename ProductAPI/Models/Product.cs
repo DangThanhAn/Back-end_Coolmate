@@ -23,7 +23,7 @@ public partial class Product
 
     public string? Sale { get; set; }
 
-    //public virtual ICollection<CartDetail> CartDetails { get; } = new List<CartDetail>();
+    public virtual ICollection<CartDetail> CartDetails { get; } = new List<CartDetail>();
 
     public virtual Category? Category { get; set; }
 

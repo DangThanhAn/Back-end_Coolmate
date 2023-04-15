@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProductAPI.Models;
 
@@ -124,6 +127,37 @@ namespace ProductAPI.Controllers
         private bool ProductExists(int id)
         {
             return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        [HttpPut("ReUpdateQuantity")]
+        public IActionResult ReUpdateQuantity(OrdersDetail orderDetails)
+        {
+            string connectionString = "Server=LAPTOP-E3SOURSA\\SQLEXPRESS;Database=Coolmate;Trusted_Connection=True;TrustServerCertificate = True";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand("Proc_UpdateQuantityAvailible", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@productId", SqlDbType.Int).Value = orderDetails.ProductId;
+                    command.Parameters.Add("@quantityBuy", SqlDbType.Int).Value = orderDetails.Quantity;
+                    command.Parameters.Add("@sizeText", SqlDbType.NVarChar).Value = orderDetails.Size;
+                    connection.Open();
+
+                    command.ExecuteNonQuery();
+
+                    return NoContent();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                
+            }
         }
     }
 }
