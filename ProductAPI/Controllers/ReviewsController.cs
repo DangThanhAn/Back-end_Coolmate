@@ -38,6 +38,25 @@ namespace ProductAPI.Controllers
             return review;
         }
 
+        [HttpGet("GetReviewOfProduct")]
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewOfProduct(int productId)
+        {
+            if (_context.Reviews == null)
+            {
+                return NotFound();
+            }
+            var review = await _context.Reviews
+                .Where(d => d.ProductId == productId).ToListAsync();
+
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            return review;
+        }
+
+
         // PUT: api/Reviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("EditReview")]

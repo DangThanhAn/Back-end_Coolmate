@@ -91,7 +91,8 @@ namespace ProductAPI.Controllers
                     command.Parameters.Add("@KQ", SqlDbType.Int).Direction = ParameterDirection.Output;
                     connection.Open();
                     command.ExecuteNonQuery();
-                    return Convert.ToInt32(command.Parameters["@KQ"].Value);
+                    int result  = Convert.ToInt32(command.Parameters["@KQ"].Value);
+                    return result;
                 }
                 catch (Exception)
                 {

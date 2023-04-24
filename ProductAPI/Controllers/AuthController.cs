@@ -35,16 +35,16 @@ namespace ProductAPI.Controllers
                 {
                     var claims = new[]
                     {
-                         new Claim("Id", user.Id.ToString()),
-                         new Claim("UserName", user.UserName),
-                         new Claim("Role", user.Role),
-                         new Claim("Email", user.Email),
-                         new Claim("PhoneNumber", user.Phone),
-                         new Claim("Address", user.Address),
-                         new Claim("DateOfBirth", user.DateOfBirth.ToString()),
-                         new Claim("Sex", user.Sex.ToString()),
-                         new Claim("Height", user.Height.ToString()),
-                         new Claim("Weight", user.Weight.ToString())
+                         new Claim("id", user.Id.ToString()),
+                         new Claim("userName", user.UserName),
+                         new Claim("role", user.Role),
+                         new Claim("email", user.Email),
+                         new Claim("phone", user.Phone),
+                         new Claim("address", user.Address),
+                         new Claim("dateOfBirth", user.DateOfBirth.ToString()),
+                         new Claim("sex", user.Sex.ToString()),
+                         new Claim("height", user.Height.ToString()),
+                         new Claim("weight", user.Weight.ToString())
                      };
                     var identity = new ClaimsIdentity(claims, "AuthenticationType");
                     identity.AddClaims(claims); var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

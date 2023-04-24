@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProductAPI.Models;
 
@@ -119,5 +122,33 @@ namespace ProductAPI.Controllers
         {
             return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        [HttpGet("UpgradePermission")]
+        public int UpgradePermission(int userId)
+        {
+            string connectionString = "Server=LAPTOP-E3SOURSA\\SQLEXPRESS;Database=Coolmate;Trusted_Connection=True;TrustServerCertificate = True";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand("Proc_UpgradePermission", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@userId", SqlDbType.Int).Value = userId;
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return 1;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
     }
 }

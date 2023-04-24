@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using ProductAPI.Models;
 using System.Data;
 
@@ -17,7 +18,15 @@ namespace ProductAPI.Controllers
             _configuration = configuration;
             _context = context;
         }
-        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Order>>> getOrder()
+        {
+            var product = await _context.Orders
+                .Include( u=> u.User )
+                .ToListAsync();
+            return product;
+        }
+
         [HttpGet("GetDetailsByOrderId")]
         public IActionResult GetDetailsByOrderId(int orderId)
         {

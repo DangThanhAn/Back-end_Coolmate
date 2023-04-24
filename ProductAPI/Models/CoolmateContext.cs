@@ -272,11 +272,9 @@ public partial class CoolmateContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)
                 .HasMaxLength(50)
-                .IsUnicode(false)
                 .HasColumnName("address");
             entity.Property(e => e.City)
                 .HasMaxLength(50)
-                .IsUnicode(false)
                 .HasColumnName("city");
             entity.Property(e => e.DateOfBirth)
                 .HasColumnType("date")
@@ -299,7 +297,6 @@ public partial class CoolmateContext : DbContext
             entity.Property(e => e.Sex).HasColumnName("sex");
             entity.Property(e => e.UserName)
                 .HasMaxLength(50)
-                .IsUnicode(false)
                 .HasColumnName("userName");
             entity.Property(e => e.Weight).HasColumnName("weight");
         });

@@ -29,9 +29,9 @@ public partial class User
 
     public string? Password { get; set; }
 
-    public virtual ICollection<Cart> Carts { get; } = new List<Cart>();
+    public virtual ICollection<Cart>? Carts { get; } = new List<Cart>();
 
-    public virtual ICollection<Order> Orders { get; } = new List<Order>();
+    public virtual ICollection<Order>? Orders { get; } = new List<Order>();
 
-    public virtual ICollection<Review> Reviews { get; } = new List<Review>();
+    public virtual ICollection<Review>? Reviews { get; } = new List<Review>();
 }
