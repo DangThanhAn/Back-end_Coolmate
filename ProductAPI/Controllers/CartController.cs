@@ -106,6 +106,17 @@ namespace ProductAPI.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Cart>> PostProduct(Cart product)
+        {
+            if (_context.Carts == null)
+            {
+                return Problem("Entity set 'CoolmateContext.Products'  is null.");
+            }
+            _context.Carts.Add(product);
+            await _context.SaveChangesAsync();
 
+            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+        }
     }
 }

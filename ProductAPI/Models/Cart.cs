@@ -11,7 +11,7 @@ public partial class Cart
 
     public decimal TotalPrice { get; set; }
 
-    public virtual ICollection<CartDetail> CartDetails { get; } = new List<CartDetail>();
+    public virtual ICollection<CartDetail>? CartDetails { get; } = new List<CartDetail>();
 
-    public virtual User User { get; set; } = null!;
+    public virtual User? User { get; set; } = null!;
 }
