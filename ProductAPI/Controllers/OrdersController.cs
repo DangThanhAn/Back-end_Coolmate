@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProductAPI.Models;
 using System.Data;
+using System.Runtime.InteropServices;
 
 namespace ProductAPI.Controllers
 {
@@ -92,5 +93,67 @@ namespace ProductAPI.Controllers
 
             }
         }
+        [HttpGet("UpdateStatusOrder")]
+        public IActionResult UpdateStatusOrder(int orderId,string status)
+        {
+            string connectionString = "Server=LAPTOP-E3SOURSA\\SQLEXPRESS;Database=Coolmate;Trusted_Connection=True;TrustServerCertificate = True";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand("Proc_UpdateStatusOrder", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add("@orderId", SqlDbType.Int).Value = orderId;
+                    command.Parameters.Add("@status", SqlDbType.NVarChar).Value = status;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    return Ok("updated status order");
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+        }
+
+        [HttpGet("GetChartPie")]
+        public IActionResult GetChartPie()
+        {
+            string connectionString = "Server=LAPTOP-E3SOURSA\\SQLEXPRESS;Database=Coolmate;Trusted_Connection=True;TrustServerCertificate = True";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand("GetChartPie", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    connection.Open();
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    return new JsonResult(dataTable);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+        }
+
     }
 }
