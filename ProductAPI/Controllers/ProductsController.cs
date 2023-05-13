@@ -159,5 +159,15 @@ namespace ProductAPI.Controllers
                 
             }
         }
+        [HttpGet("GetListFeaturedProducts")]
+        public IEnumerable<Product> GetListFeaturedProducts(int topK)
+        {
+            List<Product> bestSellingProducts = _context.Products
+                    .Include(a => a.Images)
+                .OrderBy(p => p.QuantityAvailable)
+                .Take(topK)
+                .ToList();
+            return bestSellingProducts;
+        }
     }
 }

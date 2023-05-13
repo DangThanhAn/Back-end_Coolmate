@@ -29,7 +29,8 @@ namespace ProductAPI.Controllers
                 .ToList();
 
             var userRatings = userReviews.ToDictionary(r => r.ProductId, r => r.Rating);
-            var userAvgRating = userReviews.Average(r => r.Rating);
+
+            var userAvgRating = userReviews.Any() ? userReviews.Average(r => r.Rating) : 0;
 
             var similarities = new Dictionary<int, double>();
             foreach (var review in otherReviews)
